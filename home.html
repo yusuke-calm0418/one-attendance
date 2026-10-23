@@ -1,0 +1,57 @@
+{% load static %}
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0F766E">
+  <title>ダッシュボード | One Attendance</title>
+  <link rel="stylesheet" href="{% static 'core/site.css' %}">
+</head>
+<body class="app-body">
+  <div class="app-layout">
+    <aside class="sidebar" aria-label="メインナビゲーション">
+      <div class="brand brand--hero"><span class="brand__mark" aria-hidden="true"></span>one / attendance</div>
+      <div class="sidebar__team">ONE DevLab</div>
+      <nav class="sidebar__nav" aria-label="メニュー">
+        <span class="sidebar__link sidebar__link--active" aria-current="page">概要</span>
+        <span class="sidebar__link sidebar__link--future" aria-disabled="true">勤怠一覧 <small>準備中</small></span>
+        <span class="sidebar__link sidebar__link--future" aria-disabled="true">Excel出力 <small>準備中</small></span>
+        <span class="sidebar__link sidebar__link--future" aria-disabled="true">勤務条件 <small>準備中</small></span>
+      </nav>
+      <p class="sidebar__foot">ONE-2 / LOGIN FUNCTION</p>
+    </aside>
+    <div class="app-main">
+      <header class="topbar">
+        <span class="topbar__crumb">Workspace / One Attendance</span>
+        <div class="topbar__account">
+          <span class="topbar__user">{{ request.user.get_username }}</span>
+          <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="topbar__logout">ログアウト</button>
+          </form>
+        </div>
+      </header>
+      <main class="app-content">
+        <span class="eyebrow">DASHBOARD / OVERVIEW</span>
+        <h1>今日の勤怠</h1>
+        <p class="app-content__lead">{{ request.user.get_username }} さん、おかえりなさい。</p>
+        <section class="app-panel" aria-labelledby="status-heading">
+          <div>
+            <span class="status-chip">● ログイン中</span>
+            <h2 id="status-heading">認証が完了しました。</h2>
+            <p>ここはログイン機能（ONE-2）の動作確認用ダッシュボードです。</p>
+            <p>出勤・退勤の記録、勤務時間の計算、Excel出力は、対応するJiraチケットで順次実装します。</p>
+          </div>
+          <div class="app-panel__hint" aria-label="今後の機能">
+            <span>COMING SOON</span>
+            <strong>出退勤の打刻</strong>
+            <p>ONE-9 / ONE-10</p>
+          </div>
+        </section>
+        <p class="app-disclaimer">※ まだ勤怠情報の保存・表示は行いません。認証以外の業務機能は未実装です。</p>
+      </main>
+    </div>
+  </div>
+</body>
+</html>
